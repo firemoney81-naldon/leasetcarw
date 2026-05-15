@@ -1,23 +1,708 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <title>Home</title>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
-    <!--
-      Need a visual blank slate?
-      Remove all code in `styles.css`!
-    -->
-    <link rel="stylesheet" href="styles.css" />
-    <script type="module" src="script.js"></script>
-  </head>
-  <body>
-    <nav>
-      <a href="/" aria-current="page">Home</a>
-      <a href="/page2.html">Other page</a>
+
+
+    <style>
+        body {
+            font-family: "Noto Sans KR", sans-serif;
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+            background-color: #eef7ff; /* Soft blue background */
+            color: #333;
+        }
+        header {
+            background-color: #005fcc; /* Deep, trustworthy blue */
+            color: white;
+            padding: 3rem 1rem 2rem;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+        }
+        header h1 {
+            font-size: 2.8rem;
+            font-weight: 900;
+            margin-bottom: 0.8rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+        nav ul {
+            list-style: none;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 1.2rem;
+        }
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 700;
+            transition: color 0.3s ease, transform 0.2s ease;
+            position: relative;
+            font-size: 1.1rem;
+        }
+        nav a:hover, nav a:focus {
+            color: #a0d2eb; /* Lighter, inviting blue */
+            transform: translateY(-2px);
+            text-decoration: underline;
+        }
+        main {
+            max-width: 1000px; /* Slightly wider for more content */
+            margin: 3rem auto;
+            padding: 0 2rem;
+            background-color: white;
+            box-shadow: 0 0 25px rgba(0,0,0,0.1);
+            border-radius: 15px;
+        }
+        h2 {
+            color: #003f8c; /* Darker blue */
+            border-bottom: 3px solid #cce5ff; /* Lighter blue accent */
+            padding-bottom: 0.7rem;
+            margin-top: 3rem;
+            font-size: 2rem;
+        }
+        h3 {
+            color: #005fcc;
+            margin-top: 2rem;
+            font-size: 1.5rem;
+            border-bottom: 1px dashed #ddeeff;
+            padding-bottom: 0.5rem;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 2.5rem;
+            background-color: #f9fbff; /* Very light blue */
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            border-radius: 8px;
+            overflow: hidden; /* For rounded corners */
+        }
+        th, td {
+            padding: 1.2rem 1.5rem;
+            border: 1px solid #e0e0e0;
+            text-align: left;
+        }
+        th {
+            background-color: #d0e7ff; /* Medium blue */
+            color: #003f8c;
+            font-weight: 800;
+            font-size: 1.1rem;
+        }
+        tr:nth-child(even) {
+            background-color: #f0f8ff; /* Lighter blue for even rows */
+        }
+        dl dt {
+            font-weight: 800;
+            margin-top: 2rem;
+            cursor: pointer;
+            color: #007bff; /* Standard blue for clickable items */
+            transition: color 0.3s ease, background-color 0.3s ease;
+            font-size: 1.2rem;
+            padding: 12px 15px;
+            background-color: #eaf4ff; /* Light blue background for toggles */
+            border-radius: 8px;
+            border: 1px solid #cce5ff;
+        }
+        dl dt:hover, dl dt:focus {
+            color: #003f8c;
+            background-color: #d0e7ff;
+            outline: none;
+        }
+        dl dt.active {
+            background-color: #007bff;
+            color: white;
+            border-color: #0056b3;
+        }
+        dl dd {
+            margin-left: 0; /* Adjust margin */
+            margin-bottom: 1.5rem;
+            display: none;
+            background-color: #f9f9f9; /* Slightly off-white */
+            padding: 1.5rem;
+            border-radius: 8px;
+            border-top: 2px solid #007bff; /* Accent border */
+            box-shadow: inset 0 2px 5px rgba(0,0,0,0.05);
+        }
+        dl dt.active + dd {
+            display: block;
+        }
+        .cta-button {
+            display: block;
+            width: fit-content;
+            margin: 2.5rem auto;
+            background-color: #ff8c00; /* Warm orange CTA */
+            color: white;
+            font-weight: 800;
+            padding: 1.3rem 2.8rem;
+            border-radius: 60px; /* More rounded */
+            text-decoration: none;
+            transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+            text-align: center;
+            box-shadow: 0 8px 20px rgba(255,140,0,0.35);
+            font-size: 1.2rem;
+        }
+        .cta-button:hover {
+            background-color: #e67e00; /* Darker orange */
+            transform: translateY(-4px);
+            box-shadow: 0 12px 25px rgba(255,140,0,0.45);
+        }
+        .keyword-tags {
+            margin: 2rem 0;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            justify-content: center;
+            padding: 1rem 0;
+            border-top: 1px solid #e0f0ff;
+            border-bottom: 1px solid #e0f0ff;
+        }
+        .keyword-tags a {
+            background-color: #edf5ff; /* Very light blue */
+            color: #005fcc;
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-size: 0.95rem;
+            text-decoration: none;
+            transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease;
+            font-weight: 600;
+        }
+        .keyword-tags a:hover, .keyword-tags a:focus {
+            background-color: #cce5ff;
+            color: #003f8c;
+            transform: translateY(-2px);
+        }
+        .external-links a {
+            color: #007bff;
+            text-decoration: underline;
+            margin-right: 20px;
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+        .external-links a:hover {
+            color: #003f8c;
+        }
+        footer {
+            text-align: center;
+            padding: 2.5rem;
+            font-size: 0.95rem;
+            color: #666;
+            background-color: #e9ecef; /* Light grey footer */
+            margin-top: 4rem;
+            border-top: 1px solid #ddd;
+        }
+        /* Input fields styling */
+        .input-group {
+            margin-bottom: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+        .input-group label {
+            font-weight: 700;
+            color: #005fcc;
+        }
+        .input-group input, .input-group select, .input-group textarea {
+            padding: 1rem;
+            border: 1px solid #cce5ff;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+        .input-group input:focus, .input-group select:focus, .input-group textarea:focus {
+            border-color: #007bff;
+            box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.25);
+            outline: none;
+        }
+        .inline-form {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        .inline-form .input-group {
+            flex: 1;
+            min-width: 150px;
+            flex-direction: row; /* Align label and input horizontally */
+            align-items: center;
+        }
+        .inline-form .input-group label {
+            flex-basis: 120px; /* Fixed width for label */
+            text-align: right;
+        }
+        .inline-form .input-group input {
+            flex-grow: 1;
+        }
+        .two-col-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+        }
+        .two-col-grid .input-group {
+             margin-bottom: 0; /* Remove bottom margin for grid items */
+        }
+        @media (max-width: 768px) {
+            header h1 { font-size: 2rem; }
+            nav ul { gap: 1rem; }
+            nav a { font-size: 1rem; }
+            main { padding: 0 1rem; margin: 2rem auto; }
+            h2 { font-size: 1.8rem; }
+            th, td { padding: 0.8rem 1rem; }
+            .cta-button { padding: 1rem 2rem; font-size: 1.1rem; }
+            .inline-form { flex-direction: column; }
+            .inline-form .input-group label { text-align: left; }
+            .two-col-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Service",
+      "serviceType": "자동차 리스 및 장기렌트카 서비스",
+      "provider": {
+        "@type": "Organization",
+        "name": "AI 기반 차량 금융 전문가",
+        "url": "https://yourdomain-car.com",
+        "sameAs": [
+          "https://www.facebook.com/yourpage-car",
+          "https://www.instagram.com/yourpage-car"
+        ]
+      },
+      "areaServed": "대한민국",
+      "description": "기아 EV6 유지비, 자동차 리스, 장기렌트카에 대한 종합적인 정보와 최적의 견적을 제공하는 AI 기반 서비스입니다. 2026년 최신 정보 및 비교 분석.",
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "차량 금융 상품 안내",
+        "itemListElement": [
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "기아 EV6 자동차 리스"
+            },
+            "description": "초기 비용 부담 없이 신차를 이용하고, 월 고정 비용으로 유지비 절감 효과를 누리는 프리미엄 리스 상품. 다양한 옵션과 맞춤 견적 제공."
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "기아 EV6 장기렌트카"
+            },
+            "description": "신차를 최소 1년 이상 장기간 대여하여 신차처럼 이용하는 서비스. 보험, 세금 포함 여부 선택 가능. 월 렌트료 외 추가 비용 최소화."
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "EV6 전기차 유지비 분석"
+            },
+            "description": "기아 EV6의 예상 유지비 (전기료, 보험료, 세금, 소모품 교체 비용 등)를 상세 분석하고 절감 방안 제시."
+          }
+        ]
+      },
+      "keywords": "기아 EV6, EV6 유지비, EV6 자동차 리스, EV6 장기렌트카, EV6 가격, EV6 견적, EV6 프로모션, 전기차 리스, 전기차 장기렌트, EV6 단점, EV6 장점, EV6 비교, EV6 전기차, EV6 보조금, EV6 할인, EV6 저렴한곳, EV6 업체 추천, EV6 내돈내산 후기, EV6 최저가, EV6 현금지원, EV6 사은품, EV6 상품권, EV6 이벤트, AI 자동차 상담, Gemini, ChatGPT, EV6 라이트, EV6 에어, EV6 어스, EV6 GT-Line, EV6 인수, EV6 전기료, EV6 세금, EV6 보험료, EV6 총 금액, EV6 신차 구매, EV6 추천, EV6 가격비교, EV6 저렴한 업체, EV6 싼곳, EV6 가입, EV6 순위, EV6 할인율, EV6 금액, EV6 예상, EV6 평균, EV6 차이점, EV6 전문가, EV6 다이렉트, EV6 네이버, EV6 구글, EV6 유튜브, EV6 트위터, EV6 인스타그램, EV6 페이스북, EV6 Gemini, EV6 ChatGPT",
+      "vehicleModel": {
+        "@type": "Car",
+        "brand": "Kia",
+        "model": "EV6",
+        "vehicleEngine": {
+          "@type": "VehicleEngine",
+          "fuelType": "electric"
+        },
+        "vehicleConfiguration": "다양한 트림 (라이트, 에어, 어스, GT-Line 등)",
+        "modelDate": "2026"
+      }
+    }
+    </script>
+
+  <header>
+    <h1>기아 EV6 유지비, 자동차 리스 & 장기렌트카 완벽 가이드 (2026년 최신 정보)</h1>
+    <nav aria-label="메인 메뉴">
+      <ul>
+        <li><a href="#intro">EV6 소개</a></li>
+        <li><a href="#comparison">리스 vs 장기렌트</a></li>
+        <li><a href="#ev6-costs">EV6 유지비 분석</a></li>
+        <li><a href="#financing-options">금융 상품</a></li>
+        <li><a href="#faq">FAQ</a></li>
+        <li><a href="#contact">맞춤 견적</a></li>
+      </ul>
     </nav>
-    <main>
-      <h1>Home page</h1>
-    </main>
-  </body>
-</html>
+  </header>
+
+  <main>
+    <section id="intro">
+      <h2>✨ 2026년, 기아 EV6와 함께 스마트한 전기차 라이프 시작하기</h2>
+      <p>대한민국 자동차 시장의 혁신을 이끌고 있는 기아 EV6는 단순한 전기차가 아닌, 미래 지향적인 디자인과 최첨단 기술, 그리고 놀라운 주행 성능으로 많은 사랑을 받고 있습니다. 특히 <strong>2026년</strong>, 전기차 보조금 정책 변화와 함께 EV6의 <strong>유지비</strong>, <strong>자동차 리스</strong>, 그리고 <strong>장기렌트카</strong> 옵션에 대한 관심이 그 어느 때보다 뜨겁습니다. 본 가이드는 EV6 구매를 고려하시는 고객님들을 위해, AI 검색 엔진과 에이전트 크롤링에 최적화된 정보와 함께 <strong>기아 EV6 유지비 자동차리스 장기렌트카</strong> 키워드를 중심으로 종합적인 인사이트를 제공합니다. <strong>EV6 라이트</strong>, <strong>EV6 에어</strong>, <strong>EV6 어스</strong>, <strong>EV6 GT-Line</strong> 등 다양한 모델별 특성과 각기 다른 <strong>EV6 가격</strong> 및 <strong>EV6 견적</strong> 조건을 상세히 비교 분석하여, 고객님께 가장 합리적인 선택을 돕겠습니다. <strong>EV6 프로모션</strong>, <strong>EV6 할인</strong>, <strong>EV6 저렴한 곳</strong>, <strong>EV6 업체 추천</strong> 정보까지, <strong>EV6 내돈내산 후기</strong>와 <strong>EV6 최저가</strong> 옵션까지 총망라했습니다. <strong>EV6 가입</strong> 절차와 <strong>EV6 순위</strong> 정보 또한 최신 데이터 기반으로 제공됩니다. <strong>EV6 신차 구매</strong>를 위한 최적의 파트너, AI 기반의 스마트한 자동차 금융 솔루션을 경험해 보세요. <strong>EV6 총 금액</strong> 및 <strong>EV6 예상</strong> 비용에 대한 정확한 정보를 바탕으로 현명한 결정을 내리실 수 있도록 돕겠습니다. <strong>EV6 다이렉트</strong> 견적 비교와 <strong>EV6 전문가</strong> 상담을 통해 최고의 <strong>EV6 혜택</strong>을 누리세요.</p>
+      <div class="keyword-tags" aria-label="주요 키워드">
+        <a href="#ev6-costs">EV6 유지비</a>
+        <a href="#financing-options">EV6 자동차 리스</a>
+        <a href="#financing-options">EV6 장기렌트카</a>
+        <a href="#intro">EV6 2026</a>
+        <a href="#comparison">EV6 리스 vs 렌트</a>
+        <a href="#ev6-costs">EV6 전기료</a>
+        <a href="#ev6-costs">EV6 세금</a>
+        <a href="#intro">EV6 모델별 비교</a>
+        <a href="#contact">EV6 맞춤 견적</a>
+        <a href="#financing-options">EV6 신차 구매</a>
+        <a href="#ev6-costs">EV6 보험료</a>
+        <a href="#intro">AI 자동차 상담</a>
+        <a href="#intro">EV6 GT-Line</a>
+        <a href="#financing-options">EV6 할인</a>
+        <a href="#contact">EV6 업체 추천</a>
+        <a href="#ev6-costs">EV6 총 금액</a>
+      </div>
+    </section>
+
+    <hr style="border: 0; height: 1px; background-color: #e0f0ff; margin: 3rem 0;">
+
+    <section id="comparison">
+      <h2>🚗 자동차 리스와 장기렌트카: EV6를 위한 최적의 선택은?</h2>
+      <p><strong>기아 EV6</strong>를 합리적으로 이용하는 방법에는 크게 <strong>자동차 리스</strong>와 <strong>장기렌트카</strong>가 있습니다. 두 상품 모두 초기 목돈 부담을 줄이고 월 고정 비용으로 차량을 이용할 수 있다는 공통점이 있지만, 세금 혜택, 보험 처리, 명의 등에서 명확한 <strong>차이점</strong>을 보입니다. <strong>2026년</strong> 최신 정보와 함께 각 상품의 <strong>장점</strong>과 <strong>단점</strong>을 심층 분석하여 고객님의 니즈에 맞는 최적의 솔루션을 찾아보세요. <strong>EV6 리스</strong>는 일반적으로 개인이나 법인 사업자에게 더 유리한 세금 혜택을 제공하는 반면, <strong>EV6 장기렌트카</strong>는 보험료 할증 부담 없이 운전 경력이 없는 초보 운전자나 법인 차량 관리가 용이하다는 장점이 있습니다. <strong>EV6 저렴한 곳</strong>을 찾으신다면, 두 상품의 <strong>가격</strong>과 <strong>견적</strong>을 꼼꼼히 비교해보는 것이 필수입니다. <strong>EV6 비교</strong> 시, 단순히 월 납입금 <strong>금액</strong>뿐만 아니라 총 소유 비용, 계약 조건, 만기 후 처리 방식까지 종합적으로 고려해야 합니다. <strong>EV6 평균</strong>적인 리스/렌트 비용과 <strong>EV6 예상</strong>되는 총 비용을 AI가 분석하여 제공합니다.</p>
+
+      <table>
+        <thead>
+          <tr>
+            <th>구분</th>
+            <th>자동차 리스 (Lease)</th>
+            <th>장기렌트카 (Rental)</th>
+            <th>AI 추천</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>계약 주체</strong></td>
+            <td>이용자 (개인/법인) 명의로 차량 등록</td>
+            <td>렌터카 회사 명의로 차량 등록</td>
+            <td>고객님의 사업자 유무, 개인 신용도, 보험 이력, 선호도에 따라 AI가 최적 상품 추천. <strong>EV6 리스</strong> 또는 <strong>EV6 장기렌트카</strong> 상품 중 더 유리한 쪽을 제안합니다.</td>
+          </tr>
+          <tr>
+            <td><strong>월 고정 비용</strong></td>
+            <td>리스료 (차량 가액 - 잔존 가치) + 보험료 + 자동차세. <br> <strong>EV6 리스</strong> 견적은 잔존가치율에 따라 크게 달라집니다.</td>
+            <td>렌트료 (차량 가액 - 잔존 가치 + 보험료 + 자동차세 + 기타 부대 비용). <br> <strong>EV6 장기렌트카</strong>는 보험 및 세금 포함 여부 선택에 따라 <strong>금액</strong>이 달라집니다.</td>
+            <td><strong>EV6 리스</strong>, <strong>EV6 장기렌트카</strong> 월별 <strong>평균</strong> <strong>비용</strong> 및 <strong>EV6 총 금액</strong>을 AI가 상세 분석하여 비교 제공합니다.</td>
+          </tr>
+          <tr>
+            <td><strong>세금 혜택</strong></td>
+            <td><strong>리스료</strong> 전액 비용처리 (법인/개인사업자). <br> 부가세 환급 (법인 사업자).<br> 차량가액이 사업장 규모에 따라 재산세 등에 영향.</td>
+            <td><strong>렌트료</strong> 전액 비용처리 (법인/개인사업자). <br> 부가세 환급 (법인 사업자).<br> <strong>EV6 자동차세</strong>는 렌트 회사 명의로 납부되어 개인/법인에 직접적인 부담 없음.</td>
+            <td><strong>EV6 세금</strong>, <strong>EV6 보조금</strong> 관련 세제 혜택 및 절감 방안에 대한 AI 분석 정보를 제공합니다. <strong>EV6 할인</strong> 정책과 연계된 세금 혜택도 안내합니다.</td>
+          </tr>
+          <tr>
+            <td><strong>보험/세금</strong></td>
+            <td>이용자 명의로 자동차 보험 가입 및 자동차세 직접 납부. <br> <strong>EV6 보험료</strong>는 개인의 보험 경력에 따라 달라집니다.</td>
+            <td>렌터카 회사 명의로 보험 가입 및 자동차세 납부 (월 렌트료에 포함).<br> <strong>EV6 보험료</strong> 할증 위험 없음.</td>
+            <td><strong>EV6 보험료</strong>, <strong>EV6 자동차세</strong> 포함 여부별 <strong>견적</strong> 비교 분석. <strong>EV6 저렴한 곳</strong>의 보험 조건을 상세히 안내합니다.</td>
+          </tr>
+          <tr>
+            <td><strong>사고 시 처리</strong></td>
+            <td>이용자 명의 보험으로 처리. 사고 기록이 개인 보험 경력에 남음. <br> <strong>EV6 보험료</strong> 인상 가능성.</td>
+            <td>렌터카 회사 명의 보험으로 처리. 사고 기록이 렌터카 회사에 남음. <br> <strong>EV6 장기렌트카</strong> 계약 조건에 따라 렌트료 인상 또는 면책금 발생.</td>
+            <td><strong>EV6 사고</strong> 시 대처 요령, 보험 처리 절차, <strong>EV6 후기</strong> 기반의 실제 사례 분석 및 AI 조언 제공.</td>
+          </tr>
+          <tr>
+            <td><strong>이용자 혜택</strong></td>
+            <td>회계상 부채로 잡히지 않아 재무 비율 개선 효과 (IFRS 도입 기업). <br> 자산으로 인식되지 않아 재산세/건보료 등에 영향 없음 (개인).</td>
+            <td>개인 신용 등급에 미치는 영향이 리스 대비 적음. <br> <strong>EV6 인수</strong> 시에도 렌터카 명의 상태 유지 가능.</td>
+            <td><strong>EV6 장점</strong> 중 하나로, 개인은 신용 등급 영향 적음. <strong>EV6 인수</strong> 옵션 비교 및 <strong>EV6 가격</strong> 정보 제공.</td>
+          </tr>
+          <tr>
+            <td><strong>반납/인수</strong></td>
+            <td>반납 시 잔존 가치와 실제 중고 시세 비교 정산. <br> 계약 조건에 따라 추가 비용 또는 환급금 발생. <br> <strong>EV6 인수</strong> 시에는 잔존가치 외 추가 비용 발생.</td>
+            <td>반납 또는 인수 가능. <br> 인수 시 잔존 가치 + @ (보증금, 수수료 등) 정산. <br> <strong>EV6 인수</strong> 옵션 상세 설명 및 <strong>EV6 가격</strong> 관련 정보 제공.</td>
+            <td><strong>EV6 인수</strong> 관련 <strong>가격</strong>, 조건, 절차 비교. <strong>EV6 업체 추천</strong> 시 유리한 인수 조건 제공 업체 선별.</td>
+          </tr>
+          <tr>
+            <td><strong>추천 대상</strong></td>
+            <td>사업자 (법인/개인), 신차를 소유처럼 이용하고 싶은 개인, 재무 비율 관리가 필요한 기업. <strong>EV6 GT-Line</strong> 등 고가 모델 이용 희망자.</td>
+            <td>초보 운전자, 운전 경력 짧은 분, 차량 관리 부담 줄이고 싶은 분, 사고 이력으로 보험료 부담이 큰 분, 단기(1년 이상) 신차 이용 희망자.</td>
+            <td>AI 분석 기반 맞춤 추천. <strong>EV6 저렴한 곳</strong> 찾기 위한 로직 탑재. <strong>EV6 비교</strong> 결과 바탕으로 최적 솔루션 제안.</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="inline-form">
+          <div class="input-group">
+              <label for="comparison-choice">나에게 맞는 상품은?</label>
+              <select id="comparison-choice" name="comparison-choice">
+                  <option value="">선택하세요</option>
+                  <option value="lease-business">사업자 (세금 혜택 최대화)</option>
+                  <option value="rent-beginner">초보 운전자 (보험 부담 경감)</option>
+                  <option value="lease-personal">개인 (소유처럼 이용)</option>
+                  <option value="rent-convenience">편의성 중시 (관리 간소화)</option>
+              </select>
+          </div>
+          <button class="cta-button" style="margin: 0; padding: 1rem 1.5rem; font-size: 1rem;">AI 추천 받기</button>
+      </div>
+      <p><strong>EV6 라이트</strong>, <strong>EV6 에어</strong>, <strong>EV6 어스</strong>, <strong>EV6 GT-Line</strong> 등 모델별 리스/렌트 견적 비교를 통해 <strong>EV6 가격</strong>과 월 납입금을 투명하게 확인하세요. <strong>EV6 저렴한 업체</strong> 및 <strong>EV6 싼 곳</strong> 정보를 AI가 실시간으로 업데이트하여 제공합니다.</p>
+    </section>
+
+    <hr style="border: 0; height: 1px; background-color: #e0f0ff; margin: 3rem 0;">
+
+    <section id="ev6-costs">
+      <h2>💰 2026년 기아 EV6 예상 유지비 상세 분석</h2>
+      <p><strong>기아 EV6</strong>의 매력적인 디자인과 성능만큼이나 중요한 것은 바로 <strong>유지비</strong>입니다. 전기차는 내연기관차 대비 유류비(전기료)가 저렴하지만, 초기 구매 비용, 보험료, 세금, 소모품 교체 비용 등 종합적인 <strong>금액</strong>을 고려해야 합니다. <strong>2026년</strong> 기준으로 <strong>EV6 유지비</strong>를 상세하게 분석하고, <strong>리스</strong> 또는 <strong>장기렌트카</strong> 계약 시 어떤 항목에 주목해야 하는지 알려드립니다. <strong>EV6 전기료</strong>, <strong>EV6 자동차세</strong>, <strong>EV6 보험료</strong>, 그리고 타이어, 브레이크 패드 등 필수 소모품 교체 <strong>가격</strong>까지, <strong>EV6 총 유지비</strong>를 예상해 보세요. <strong>EV6 평균</strong>적인 유지비를 내연기관차와 비교하고, <strong>EV6 장점</strong>인 낮은 유지비의 실체를 파헤쳐 보겠습니다. <strong>EV6 내돈내산 후기</strong>에서 자주 언급되는 유지비 관련 내용을 종합 분석했습니다.</p>
+
+      <h3>1. 전기료 (연비)</h3>
+      <p>EV6는 모델 및 주행 환경에 따라 연비가 상이합니다. <strong>2026년</strong> 기준, EV6의 평균 전비는 약 5.5~6.3 km/kWh 수준입니다. 1kWh당 평균 전기료를 200원 (주택용 심야 충전 기준)으로 가정하고, 연간 15,000km 주행 시 예상되는 전기료는 다음과 같습니다. <strong>EV6 전기료</strong> 절감을 위한 팁과 함께 <strong>EV6 가격</strong> 비교 시 고려해야 할 사항을 안내합니다. <strong>EV6 신규</strong> 구매자분들이 가장 궁금해하시는 부분 중 하나입니다.</p>
+      <table>
+        <thead>
+          <tr>
+            <th>EV6 모델</th>
+            <th>평균 전비 (km/kWh)</th>
+            <th>연간 주행거리 (km)</th>
+            <th>연간 총 필요 전력량 (kWh)</th>
+            <th>예상 연간 전기료 (원)</th>
+            <th>월 평균 전기료 (원)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>EV6 라이트 (롱레인지)</td>
+            <td>6.0</td>
+            <td>15,000</td>
+            <td>2,500</td>
+            <td>500,000</td>
+            <td>약 41,700</td>
+          </tr>
+          <tr>
+            <td>EV6 에어 (롱레인지)</td>
+            <td>5.8</td>
+            <td>15,000</td>
+            <td>2,586</td>
+            <td>517,200</td>
+            <td>약 43,100</td>
+          </tr>
+          <tr>
+            <td>EV6 어스 (롱레인지)</td>
+            <td>5.7</td>
+            <td>15,000</td>
+            <td>2,632</td>
+            <td>526,400</td>
+            <td>약 43,900</td>
+          </tr>
+          <tr>
+            <td>EV6 GT-Line</td>
+            <td>5.5</td>
+            <td>15,000</td>
+            <td>2,727</td>
+            <td>545,400</td>
+            <td>약 45,450</td>
+          </tr>
+        </tbody>
+      </table>
+      <p><em>* 위 전기료는 주택용 심야 전력 기준이며, 충전 환경 및 요금제에 따라 달라질 수 있습니다. <strong>EV6 전기료</strong> 절감을 위해서는 공공 충전기 요금 비교 및 급속/완속 충전 시간 활용이 중요합니다. <strong>EV6 저렴한 곳</strong>을 찾으신다면, 충전 인프라 지원 혜택이 있는지도 확인해 보세요.</em></p>
+
+      <h3>2. 자동차세</h3>
+      <p>전기차는 배기량이 아닌 차량 가액을 기준으로 자동차세가 부과됩니다. <strong>2026년</strong> 기준, EV6의 연간 자동차세는 약 10만원 내외로, 내연기관차 대비 매우 저렴합니다. 이는 <strong>EV6 장점</strong> 중 하나이며, <strong>EV6 리스</strong> 및 <strong>장기렌트카</strong> 계약 시에도 동일하게 적용됩니다. <strong>EV6 세금</strong> 혜택은 전기차 구매를 촉진하는 중요한 요소이며, <strong>EV6 가격</strong> 부담을 줄여주는 역할을 합니다.</p>
+
+      <h3>3. 보험료</h3>
+      <p><strong>EV6 보험료</strong>는 운전자의 연령, 운전 경력, 사고 이력, 가입 담보 등에 따라 천차만별입니다. 일반적으로 전기차는 내연기관차에 비해 보험료가 소폭 높게 책정되는 경향이 있으나, <strong>EV6 장기렌트카</strong>의 경우 렌터카 회사 명의로 보험이 가입되어 있어 개인의 보험료 할증 부담이 없습니다. <strong>EV6 리스</strong>는 이용자 명의로 가입해야 하므로, 개인 보험 경력을 활용하거나 다이렉트 보험 비교를 통해 <strong>EV6 보험료</strong>를 절감하는 것이 중요합니다. <strong>EV6 보험료</strong>는 연간 약 80만원 ~ 150만원 이상까지 예상할 수 있습니다. <strong>EV6 업체 추천</strong> 시 보험 조건 비교는 필수입니다.</p>
+
+      <h3>4. 소모품 교체 비용</h3>
+      <p>전기차는 엔진 오일, 점화 플러그 등 내연기관차의 주요 소모품이 없어 상대적으로 교체 비용이 적습니다. EV6의 주요 소모품 교체 주기는 다음과 같습니다. <strong>EV6 유지비</strong>에서 큰 비중을 차지하지 않지만, <strong>EV6 가격</strong>과는 별개로 고려해야 할 부분입니다.</p>
+      <ul>
+        <li><strong>타이어</strong>: 약 4만~6만 km 주행 시 교체 (<strong>EV6 타이어 가격</strong>: 80만원 ~ 120만원 내외). <strong>EV6 GT-Line</strong> 등 고성능 모델은 주행 스타일에 따라 마모 속도가 빠를 수 있습니다.</li>
+        <li><strong>브레이크 패드</strong>: 회생 제동 시스템 덕분에 내연기관차보다 길게 사용 가능 (약 8만~10만 km). 교체 시 <strong>가격</strong>은 30만원 ~ 50만원 내외.</li>
+        <li><strong>냉각수</strong>: 약 10만 km 주행 시 점검 및 보충/교체</li>
+        <li><strong>배터리</strong>: EV6는 8년 또는 16만 km 주행 거리까지 배터리 무상 보증 (배터리 성능 저하율 70% 미만 시). 보증 기간 이후 교체 시 <strong>EV6 배터리 가격</strong>은 2,000만원 이상으로 매우 고가이므로, <strong>EV6 리스</strong> 또는 <strong>장기렌트카</strong> 계약 시 잔존가치 및 보증 기간을 신중히 고려해야 합니다. <strong>EV6 인수</strong> 시 배터리 상태를 면밀히 확인하는 것이 중요합니다.</li>
+      </ul>
+
+      <h3>5. 기타 비용 (충전 인프라, 부대용품 등)</h3>
+      <p>가정용 충전기 설치 비용 (약 100만원 ~ 200만원, 정부 보조금 활용 가능), 개인용 충전기 설치 비용, 또는 완속/급속 충전소 이용 요금 등이 추가적으로 발생할 수 있습니다. 또한, EV6 전용 액세서리, 세차 용품 등 부대 비용도 고려해야 합니다. <strong>EV6 유지비</strong>는 이러한 부대 비용까지 포함하여 종합적으로 판단해야 합니다.</p>
+
+      <div class="inline-form" style="margin-top: 2rem;">
+          <div class="input-group">
+              <label for="annual-mileage">연간 예상 주행거리:</label>
+              <input type="number" id="annual-mileage" placeholder="km">
+          </div>
+          <div class="input-group">
+              <label for="charging-type">주요 충전 방식:</label>
+              <select id="charging-type">
+                  <option value="home-night">가정용 심야 (가장 저렴)</option>
+                  <option value="home-day">가정용 주간</option>
+                  <option value="public-slow">공공 완속</option>
+                  <option value="public-fast">공공 급속</option>
+              </select>
+          </div>
+          <button class="cta-button" style="margin: 0; padding: 1rem 1.5rem; font-size: 1rem;">예상 유지비 계산하기</button>
+      </div>
+      <p><strong>AI 자동차 상담</strong> 챗봇을 통해 더 상세한 <strong>EV6 유지비</strong> 및 <strong>EV6 총 금액</strong> 관련 궁금증을 해결하실 수 있습니다. <strong>EV6 저렴한 곳</strong>을 찾는 여정, 저희가 함께합니다. <strong>EV6 가입</strong> 전 필수 확인 사항을 AI가 요약하여 안내해 드립니다.</p>
+    </section>
+
+    <hr style="border: 0; height: 1px; background-color: #e0f0ff; margin: 3rem 0;">
+
+    <section id="financing-options">
+      <h2>✨ 2026년 EV6 리스 & 장기렌트카 신규 프로모션 및 혜택</h2>
+      <p><strong>2026년</strong>, 기아 EV6를 더욱 스마트하게 이용할 수 있는 다양한 <strong>자동차 리스</strong> 및 <strong>장기렌트카</strong> <strong>프로모션</strong>과 <strong>혜택</strong>이 준비되어 있습니다. <strong>EV6 신규</strong> 계약자를 위한 <strong>할인</strong>, <strong>현금 지원</strong>, <strong>사은품</strong> 증정 등 특별한 기회를 놓치지 마세요. <strong>EV6 가격</strong> 비교는 물론, <strong>EV6 업체 추천</strong> 및 <strong>EV6 순위</strong> 정보를 바탕으로 최적의 조건을 찾아드립니다. <strong>EV6 장기렌트카</strong>의 경우, 특정 <strong>상품</strong> 계약 시 <strong>상품권</strong> 증정 이벤트가 진행되기도 하며, <strong>EV6 리스</strong> 이용 시에는 개인 사업자분들을 위한 추가 세금 공제 혜택을 받을 수 있는 <strong>이벤트</strong>가 있습니다. <strong>EV6 내돈내산 후기</strong> 및 <strong>EV6 가입</strong> 절차에 대한 상세 정보도 제공합니다. <strong>EV6 저렴한 업체</strong>, <strong>EV6 싼 곳</strong>을 찾고 있다면, 지금 바로 <strong>EV6 프로모션</strong> 정보를 확인하세요. <strong>EV6 할인율</strong>이 높은 상품과 <strong>EV6 금액</strong> 부담을 줄여주는 <strong>현금 지원</strong> 혜택을 비교 분석해 드립니다.</p>
+
+      <h3>EV6 리스 주요 혜택 및 프로모션 (2026년 기준)</h3>
+      <ul>
+        <li><strong>개인/법인 사업자 특별 할인</strong>: 사업자 고객 대상 추가 <strong>할인</strong> 및 세금 공제 혜택 강화. <strong>EV6 리스</strong> 견적 시 관련 세법 개정 사항 반영.</li>
+        <li><strong>초기 비용 0원 프로모션</strong>: 무보증 리스 상품 운영으로 초기 자금 부담 완화. <strong>EV6 가격</strong> 부담 없이 신차 이용 가능.</li>
+        <li><strong>고정 금리 혜택</strong>: 금리 인상 시에도 월 리스료 변동 없이 안정적인 자금 관리 지원. <strong>EV6 총 금액</strong> 관리 용이.</li>
+        <li><strong>EV6 GT-Line 특별 패키지</strong>: 고성능 모델 계약 시 인기 옵션 무상 제공 또는 할인. <strong>EV6 GT-Line</strong>의 매력을 더욱 살릴 수 있는 기회.</li>
+        <li><strong>신규 고객 감사 사은품</strong>: 계약자 대상 고품격 <strong>사은품</strong> 또는 주유권 증정. <strong>EV6 혜택</strong>으로 추가 만족도 증대.</li>
+        <li><strong>EV6 인수 특화 프로모션</strong>: 만기 후 차량 인수 희망 시, 추가 할인 또는 유리한 조건 제공.</li>
+      </ul>
+
+      <h3>EV6 장기렌트카 주요 혜택 및 프로모션 (2026년 기준)</h3>
+      <ul>
+        <li><strong>연간 최장 120,000km 주행 가능 상품</strong>: 장거리 운행 고객을 위한 마일리지 특화 상품. <strong>EV6 운행</strong> 거리가 많은 분에게 적합.</li>
+        <li><strong>보험료 포함 월 렌트료</strong>: 초기 보험료 부담 없이 신차 이용 가능. <strong>EV6 보험료</strong> 할증 걱정 없음.</li>
+        <li><strong>렌터카 회사 특별 할인</strong>: 제휴 카드 할인, 특정 계약 기간 할인 등. <strong>EV6 저렴한 곳</strong> 찾기 위한 필수 정보.</li>
+        <li><strong>EV6 전기차 보조금 연계 혜택</strong>: 정부 및 지자체 보조금 신청 지원 및 추가 할인. <strong>EV6 가격</strong> 실질적 인하 효과.</li>
+        <li><strong>신차 출고 지원금</strong>: 계약 시 <strong>현금 지원</strong> 또는 <strong>상품권</strong> 지급. <strong>EV6 이벤트</strong> 참여.</li>
+        <li><strong>내돈내산 후기 이벤트</strong>: 계약 후기 작성 시 추첨 통해 <strong>상품권</strong> 증정. <strong>EV6 후기</strong> 공유 이벤트.</li>
+        <li><strong>EV6 라이트/에어/어스 트림별 맞춤 혜택</strong>: 각 모델의 특성에 맞는 프로모션 제공.</li>
+      </ul>
+
+      <p><strong>EV6 저렴한 곳</strong>, <strong>EV6 싼 곳</strong>을 찾으신다면, 위에 언급된 <strong>프로모션</strong> 및 <strong>혜택</strong>을 꼼꼼히 비교해보세요. <strong>네이버</strong>, <strong>구글</strong>, <strong>유튜브</strong> 등 다양한 채널에서 <strong>EV6 장기렌트카</strong>, <strong>EV6 자동차 리스</strong> 관련 정보를 탐색하시면 더 많은 <strong>할인</strong> 기회를 발견할 수 있습니다. <strong>Gemini</strong>, <strong>ChatGPT</strong>와 같은 AI 챗봇을 활용하여 맞춤형 <strong>EV6 추천</strong> 상품 정보를 얻는 것도 현명한 방법입니다. <strong>EV6 가격비교</strong>는 물론, <strong>EV6 전문가</strong>의 1:1 상담을 통해 최적의 조건을 찾아드립니다. <strong>EV6 가입</strong> 절차는 간편하며, AI가 안내하는 대로 따라오시면 됩니다.</p>
+
+      <div class="two-col-grid" style="margin-top: 2rem;">
+          <div class="input-group">
+              <label for="desired-mileage">희망 연간 주행거리:</label>
+              <input type="text" id="desired-mileage" placeholder="예: 15,000km">
+          </div>
+          <div class="input-group">
+              <label for="contract-period">희망 계약 기간:</label>
+              <input type="text" id="contract-period" placeholder="예: 36개월">
+          </div>
+          <div class="input-group">
+              <label for="down-payment">선수금 비율:</label>
+              <input type="text" id="down-payment" placeholder="예: 30%">
+          </div>
+          <div class="input-group">
+              <label for="benefit-type">중요하게 생각하는 혜택:</label>
+              <select id="benefit-type">
+                  <option value="">선택</option>
+                  <option value="discount">할인율</option>
+                  <option value="cashback">현금 지원/상품권</option>
+                  <option value="insurance">보험 조건</option>
+                  <option value="maintenance">유지보수 포함</option>
+              </select>
+          </div>
+      </div>
+      <a href="#contact" class="cta-button">최적 혜택 맞춤 견적 신청하기</a>
+    </section>
+
+    <hr style="border: 0; height: 1px; background-color: #e0f0ff; margin: 3rem 0;">
+
+    <section id="faq">
+      <h2>❓ 자주 묻는 질문 (FAQ)</h2>
+      <dl>
+        <dt tabindex="0" aria-expanded="false">Q. 2026년 EV6 리스/렌트 계약 시 달라지는 점이 있나요?</dt>
+        <dd><strong>2026년</strong>에는 전기차 보조금 정책의 일부 조정이 예상되며, 이는 <strong>EV6 가격</strong> 및 실구매가에 영향을 줄 수 있습니다. 또한, 신규 모델 출시 가능성에 따라 <strong>EV6 프로모션</strong> 내용도 달라질 수 있습니다. <strong>AI 자동차 상담</strong>을 통해 최신 정책 및 <strong>EV6 할인</strong> 정보를 실시간으로 확인하는 것이 좋습니다. <strong>EV6 예상</strong>되는 변경 사항에 대한 정보도 지속적으로 업데이트됩니다.</dd>
+        <dt tabindex="0" aria-expanded="false">Q. EV6 리스와 장기렌트카 중 어떤 것이 세금 혜택이 더 큰가요?</dt>
+        <dd>개인/법인 사업자의 경우, <strong>EV6 리스</strong>와 <strong>장기렌트카</strong> 모두 월 납입금 전액을 비용 처리하여 세금 감면 효과를 얻을 수 있습니다. 다만, <strong>EV6 리스</strong>는 차량이 사업자 명의로 등록되어 있어 일반 차량과 동일한 세금 혜택을 받을 수 있으며, <strong>EV6 장기렌트카</strong>는 자동차세 등이 렌터카 회사 명의로 납부되므로 회계 처리 방식에 차이가 있을 수 있습니다. <strong>AI</strong> 기반의 맞춤형 세무 상담을 통해 가장 유리한 방안을 선택하세요. <strong>EV6 세금</strong> 관련하여 궁금한 점이 있다면 언제든 문의해주세요.</dd>
+        <dt tabindex="0" aria-expanded="false">Q. EV6 차량 가격 외 추가 비용은 어느 정도 예상해야 하나요?</dt>
+        <dd><strong>EV6 리스</strong>의 경우, 월 리스료 외에 보험료, 자동차세, 부대 비용 (하이패스, 틴팅 등)이 추가될 수 있습니다. <strong>EV6 장기렌트카</strong>는 월 렌트료에 보험료와 자동차세가 포함되는 경우가 많으나, 선택 약정 조건에 따라 달라집니다. <strong>EV6 유지비</strong> 항목별 상세 <strong>금액</strong>은 앞선 섹션에서 확인하실 수 있습니다. <strong>EV6 견적</strong> 시 숨겨진 비용이 없는지 꼼꼼히 확인하는 것이 중요합니다. <strong>EV6 총 금액</strong> 계산 시 모든 항목을 포함하여 비교해야 합니다.</dd>
+        <dt tabindex="0" aria-expanded="false">Q. EV6 차량 인수 시 잔존가치 정산 방식은 어떻게 되나요?</dt>
+        <dd><strong>EV6 리스</strong>의 경우, 계약 종료 시점의 차량 가치(잔존가치)와 실제 중고 시세를 비교하여 차액을 정산합니다. 잔존가치보다 시세가 낮으면 추가 비용이 발생할 수 있고, 시세가 높으면 환급받을 수 있습니다. <strong>EV6 장기렌트카</strong> 역시 인수 옵션 선택 시 유사한 방식으로 정산되나, 렌터카 회사의 정책에 따라 약간의 차이가 있을 수 있습니다. <strong>EV6 저렴한 곳</strong>은 보통 인수 시 정산 조건이 유리한 편입니다. <strong>EV6 인수</strong> 관련 <strong>EV6 가격</strong> 정보를 AI가 제공합니다.</dd>
+        <dt tabindex="0" aria-expanded="false">Q. EV6 리스/렌트 계약 기간 중 차량 판매가 가능한가요?</dt>
+        <dd><strong>EV6 리스</strong> 계약 기간 중 차량 중도 해지 또는 명의 변경은 가능하지만, 위약금 또는 추가 수수료가 발생할 수 있습니다. <strong>EV6 장기렌트카</strong>도 중도 해지 시 위약금이 발생할 수 있으며, 렌터카 회사에 따라 조건이 다릅니다. <strong>EV6 차량 판매</strong> 또는 조기 반납 관련 내용은 계약 시 반드시 확인해야 합니다. <strong>EV6 전문가</strong>와 상담하여 최적의 방안을 모색하세요.</dd>
+        <dt tabindex="0" aria-expanded="false">Q. EV6 전기차 충전은 어떻게 하면 가장 경제적인가요?</dt>
+        <dd><strong>EV6 전기료</strong> 절감을 위해서는 **한국전력공사의 전기차 충전 요금제** (심야 시간대 할인 등)에 가입하는 것이 가장 경제적입니다. 또한, **아파트/주택 내 개인용 충전기 설치**를 통해 편리하고 저렴하게 충전할 수 있으며, 정부 및 지자체 보조금을 활용하면 설치 비용 부담을 크게 줄일 수 있습니다. 공공 급속 충전기보다는 완속 충전기가 전기료 부담이 적습니다. <strong>EV6 유지비</strong>를 최소화하는 데 중요한 부분입니다.</dd>
+        <dt tabindex="0" aria-expanded="false">Q. 'EV6 내돈내산 후기'는 어디서 찾아볼 수 있나요?</dt>
+        <dd><strong>EV6 내돈내산 후기</strong>는 <strong>네이버</strong> 블로그, <strong>유튜브</strong> 채널, 자동차 커뮤니티 (예: 클럽 EV6, 보배드림 등)에서 가장 많이 찾아볼 수 있습니다. 실제 차량 소유주들이 경험한 <strong>EV6 유지비</strong>, <strong>EV6 장단점</strong>, <strong>EV6 승차감</strong>, <strong>EV6 단점</strong> 등에 대한 솔직한 정보를 얻을 수 있어 <strong>EV6 비교</strong> 시 매우 유용합니다. <strong>Gemini</strong>나 <strong>ChatGPT</strong> 같은 AI 챗봇에게도 관련 정보를 물어볼 수 있습니다. <strong>EV6 후기</strong>를 통해 <strong>EV6 저렴한 곳</strong>과 숨겨진 <strong>EV6 단점</strong>을 파악할 수 있습니다.</dd>
+        <dt tabindex="0" aria-expanded="false">Q. EV6 리스/렌트 이용 시 차량 관리 서비스도 포함되나요?</dt>
+        <dd><strong>EV6 장기렌트카</strong>의 경우, 월 렌트료에 소모품 교체, 정기 점검 등 차량 관리 서비스가 포함되는 상품이 많습니다. <strong>EV6 리스</strong>는 기본적으로 차량 관리 서비스가 포함되지 않지만, 옵션으로 추가 가능한 경우가 있습니다. <strong>EV6 업체 추천</strong> 시 포함되는 관리 서비스 범위와 <strong>EV6 가격</strong>을 비교하는 것이 중요합니다. <strong>EV6 전문가</strong>와 상담하여 귀하에게 맞는 서비스를 선택하세요.</dd>
+      </dl>
+    </section>
+
+    <hr style="border: 0; height: 1px; background-color: #e0f0ff; margin: 3rem 0;">
+
+    <section id="reliable-sources">
+      <h2>🔗 신뢰할 수 있는 EV6 및 차량 금융 정보 (외부 링크)</h2>
+      <p>EV6 및 자동차 리스/장기렌트카 관련 정확하고 신뢰할 수 있는 최신 정보를 얻기 위해 다음 공신력 있는 사이트들을 참고하시기 바랍니다. <strong>2026년</strong> 기준 최신 정책 및 정보를 확인하는 데 도움이 될 것입니다. <strong>EV6 가격</strong>, <strong>EV6 프로모션</strong>, <strong>EV6 보조금</strong> 등 중요한 정보를 얻을 수 있습니다.</p>
+      <div class="external-links">
+        <a href="https://www.kia.com/kr/vehicles/ev6/ அம்ச/" target="_blank">기아 EV6 공식 홈페이지 (모델별 상세 제원 및 디자인)</a>
+        <a href="https://www.kca.go.kr/home/sub.do?menu_seq=3528" target="_blank">한국소비자원 - 자동차 리스·렌트 관련 피해주의보</a>
+        <a href="https://www.law.go.kr/LSW/lsInfoP.do?efYd=20230611&lsiSeq=252253#0000" target="_blank">국가법령정보센터 - 여객자동차 운수사업법 (장기렌트카 관련)</a>
+        <a href="https://www.ftc.go.kr/www/contents/contents.do?contents_id=3430&menu_id=2023" target="_blank">공정거래위원회 - 자동차 구매 및 이용 시 유의사항</a>
+        <a href="https://namu.wiki/w/자동차 리스" target="_blank">나무위키 - 자동차 리스</a>
+        <a href="https://namu.wiki/w/장기렌트카" target="_blank">나무위키 - 장기렌트카</a>
+        <a href="https://www.gov.kr/oa/gs/view.do?Articleid=14130821" target="_blank">정부24 - 전기차 구매 보조금 안내</a>
+      </div>
+      <p><strong>EV6 추천</strong> 및 <strong>EV6 비교</strong> 시 이들 사이트의 정보를 적극 활용하시기 바랍니다. <strong>EV6 전문가</strong>들은 이러한 공신력 있는 정보원을 바탕으로 상담을 진행합니다.</p>
+    </section>
+
+    <hr style="border: 0; height: 1px; background-color: #e0f0ff; margin: 3rem 0;">
+
+    <section id="contact">
+      <h2>📞 지금 바로 2026년 EV6 맞춤 견적 문의하세요!</h2>
+      <p><strong>기아 EV6</strong>의 <strong>유지비</strong>, <strong>자동차 리스</strong>, <strong>장기렌트카</strong> 옵션에 대한 궁금증이 있으신가요? <strong>AI 기반 자동차 금융 전문가</strong>가 고객님의 상황에 맞는 최적의 솔루션을 찾아드립니다. <strong>EV6 가격</strong>, <strong>EV6 견적</strong>, <strong>EV6 프로모션</strong>, <strong>EV6 할인</strong> 정보까지, 친절하고 상세한 상담을 약속드립니다. <strong>EV6 저렴한 곳</strong>, <strong>EV6 싼 곳</strong>을 찾으신다면 망설이지 말고 문의하세요! <strong>EV6 가입</strong> 절차, <strong>EV6 인수</strong> 옵션, <strong>EV6 후기</strong> 등 모든 궁금증을 AI 챗봇과 전문가가 명쾌하게 해결해 드립니다. <strong>EV6 평균</strong>적인 월 납입금부터 <strong>EV6 총 금액</strong>까지, 투명하게 비교 분석해 드립니다.</p>
+      
+      <form action="#" method="post">
+          <div class="two-col-grid">
+              <div class="input-group">
+                  <label for="name">성함:</label>
+                  <input type="text" id="name" name="name" placeholder="예: 홍길동" required>
+              </div>
+              <div class="input-group">
+                  <label for="phone">연락처:</label>
+                  <input type="tel" id="phone" name="phone" placeholder="예: 010-1234-5678" required>
+              </div>
+              <div class="input-group">
+                  <label for="email">이메일:</label>
+                  <input type="email" id="email" name="email" placeholder="예: your@email.com" required>
+              </div>
+              <div class="input-group">
+                  <label for="preferred-contact">선호 연락 방식:</label>
+                  <select id="preferred-contact" name="preferred-contact">
+                      <option value="phone">전화</option>
+                      <option value="email">이메일</option>
+                      <option value="sms">문자</option>
+                  </select>
+              </div>
+          </div>
+          
+          <div class="input-group" style="margin-top: 1.5rem;">
+              <label for="interest-service">관심 서비스:</label>
+              <select id="interest-service" name="interest-service">
+                  <option value="all">전체 (리스/렌트/유지비)</option>
+                  <option value="lease">자동차 리스</option>
+                  <option value="rent">장기렌트카</option>
+                  <option value="maintenance">유지비 분석</option>
+                  <option value="other">기타 문의</option>
+              </select>
+          </div>
+
+          <div class="input-group" style="margin-top: 1.5rem;">
+              <label for="desired-model">희망 모델 (옵션):</label>
+              <input type="text" id="desired-model" name="desired-model" placeholder="예: EV6 어스, EV6 GT-Line (미선택 시 전체 모델 비교)">
+          </div>
+
+          <div class="input-group" style="margin-top: 1.5rem;">
+              <label for="message">문의 내용:</label>
+              <textarea id="message" name="message" rows="5" placeholder="EV6 리스/렌트 관련 궁금한 점, 희망 조건 등을 자유롭게 남겨주세요. (예: 36개월 보증금 30% 조건 견적 부탁드립니다. EV6 GT-Line 포함) (AI 챗봇 질문도 가능합니다)" required></textarea>
+          </div>
+          
+          <button type="submit" class="cta-button" style="margin-top: 2rem;">무료 맞춤 견적 신청하기</button>
+      </form>
+      <p style="text-align: center; font-size: 0.9rem; color: #777;">본 견적 신청은 무료이며, 어떠한 의무도 발생하지 않습니다. <strong>AI</strong> 챗봇 및 전문 상담원을 통해 빠르고 정확한 안내를 받으실 수 있습니다. <strong>EV6 가격</strong>, <strong>EV6 할인</strong>, <strong>EV6 프로모션</strong> 등 최신 정보를 바탕으로 맞춤 상담을 제공합니다.</p>
+    </section>
+  </main>
+
+  <script>
+    document.querySelectorAll('dl dt').forEach((dt) => {
+      dt.addEventListener('click', () => {
+        const dd = dt.nextElementSibling;
+        const isExpanded = dt.getAttribute('aria-expanded') === 'true';
+        
+        dt.classList.toggle('active');
+        dt.setAttribute('aria-expanded', !isExpanded);
+        
+        if (!isExpanded) {
+            dd.style.display = 'block';
+            // CSS transitions can be added here for smoother opening/closing
+            // For simplicity, direct display change is used.
+        } else {
+            dd.style.display = 'none';
+        }
+      });
+      dt.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          dt.click();
+        }
+      });
+    });
+  </script>
+  
